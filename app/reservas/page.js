@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import Citas from "./components/citas/Citas";
-import Formulario from "./components/formulario/Formulario";
-import Header from "./components/header/Header";
+"use client";
 
+import { useState } from "react";
 
-function App() {
+const { default: Citas } = require("../components/citas/Citas");
+const { default: Formulario } = require("../components/formulario/Formulario");
+const { default: Header } = require("../components/header/Header");
+
+function Reserva() {
   const [citas, setCitas] = useState([]);
 
   // Función para agregar una nueva cita al listado
@@ -46,4 +48,4 @@ function App() {
   );
 }
 
-export default App;
+export default Reserva;
