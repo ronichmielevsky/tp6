@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const { default: Citas } = require("../components/citas/Citas");
 const { default: Formulario } = require("../components/formulario/Formulario");
 const { default: Header } = require("../components/header/Header");
 
 function Reserva() {
-  const [citas, setCitas] = useState([]);
+  const localCitas = localStorage.getItem("citas");
+  
+  const [citas, setCitas] = useState(localCitas ? JSON.parse(localCitas) : []);
 
   // Función para agregar una nueva cita al listado
   const agregarCita = (nuevaCita) => {
@@ -27,9 +29,14 @@ function Reserva() {
       nuevasCitas.splice(indice, 1);
       setCitas(nuevasCitas);
     }
-  };
+  };  
+
+  useEffect(() => { 
+    localStorage.setItem("citas",JSON.stringify(citas));
+  }, [citas]);  
 
   return (
+
     <>
       <Header />
       <div className="container">
